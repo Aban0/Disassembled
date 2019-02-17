@@ -145,7 +145,7 @@ void redFarSide()
 
 task autonomous()
 {
-		//flag
+	//flag
 	moveBackward();
 	wait1Msec(1750);
 	// Chooses which auton to run based on where jumper clips are placed
@@ -193,12 +193,18 @@ task usercontrol()
 	while (true)
 	{
 		// Drive controls
-		motor[rightDrive1] = vexRT[Ch2];
-		motor[rightDrive2] = vexRT[Ch2];
-		motor[rightDrive3] = vexRT[Ch2];
-		motor[leftDrive1] = vexRT[Ch3];
-		motor[leftDrive2] = vexRT[Ch3];
-		motor[leftDrive3] = vexRT[Ch3];
+		if (vexRT(Ch2) > 3 || vexRT(Ch2) < -3)
+		{
+			motor[rightDrive1] = vexRT[Ch2];
+			motor[rightDrive2] = vexRT[Ch2];
+			motor[rightDrive3] = vexRT[Ch2];
+		}
+		if (vexRT(Ch3) > 3 || vexRT(Ch3) < -3)
+		{
+			motor[leftDrive1] = vexRT[Ch3];
+			motor[leftDrive2] = vexRT[Ch3];
+			motor[leftDrive3] = vexRT[Ch3];
+		}
 
 		// Six bar controls
 		if (vexRT[Btn6U] == 1)
