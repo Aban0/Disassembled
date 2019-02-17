@@ -182,11 +182,11 @@ task usercontrol()
 	// Declaring Variables
 	int KpR = 0;
 	int errorR = 0;
-	int targetSpeedR = 0;
+	int targetLocationR = 0;
 	int drivePowerR = 0;
 	int KpL = 0;
 	int errorL = 0;
-	int targetSpeedL = 0;
+	int targetLocationL = 0;
 	int drivePowerL = 0;
 	bool brakes = false;
 
@@ -247,6 +247,8 @@ task usercontrol()
 		if (vexRT[Btn8D] == 1)
 		{
 			brakes = !brakes;
+			targetLocationR = SensorValue[rightDrive];
+			targetLocationL = SensorValue[leftDrive];
 		}
 
 		while (brakes == true)
@@ -258,38 +260,46 @@ task usercontrol()
 			}
 
 			// Right side
-			errorR = targetSpeedR - SensorValue[rightDrive];  // Currently just P, we can add on in the future
-			drivePowerR += (int)(KpR*errorR);
-			//
-			// Limit the drive power range to 0
-			//
-			if (SensorValue[rightDrive] < drivePowerR)
-			{
-				while (SensorValue[rightDrive] < drivePowerR)
-				{
-					moveForward();
-				}
-				stopDrive();
-			}
-			else if (drivePowerR < 0)
-			{
-				drivePowerR = 0;
-			}
+			// Find error and integrate P into it
+			errorR = targetLocationR - abs(SensorValue[rightDrive]);  // Currently just P, we can add on in the future
+			drivePowerR = (int)(KpR*errorR);
 
-			// Left side
-			// PID Parking Brake left side
-			errorL = targetSpeedL - SensorValue[leftDrive];   // Currently just P, we can add on in the future
-			drivePowerL += (int)(KpL*errorL);
-			//
-			// Limit the drive power range to 0
-			//
-			if (drivePowerL > 0)
+			// Change drive power accoring to sensor value
+			if (errorR > 5)
 			{
-				drivePowerL = 0;
+				while (SensorValue[rightDrive] < targetLocationR)
+				{
+					motor[rightDrive1] = drivePowerR;
+					motor[rightDrive2] = drivePowerR;
+					motor[rightDrive3] = drivePowerR;
+				}
+				while (SensorValue[rightDrive] > targetLocationR)
+				{
+					motor[rightDrive1] = drivePowerR;
+					motor[rightDrive2] = drivePowerR;
+					motor[rightDrive3] = drivePowerR;
+				}
 			}
-			else if (drivePowerL < 0)
+			// Left side
+			// Find error and integrate P into it
+			errorL = targetLocationL - abs(SensorValue[leftDrive]);   // Currently just P, we can add on in the future
+			drivePowerL += (int)(KpL*errorL);
+
+			// Change drive power accoring to sensor value
+			if (errorL > 5)
 			{
-				drivePowerL = 0;
+				while (SensorValue[leftDrive] < targetLocationL)
+				{
+					motor[leftDrive1] = drivePowerL;
+					motor[leftDrive2] = drivePowerL;
+					motor[leftDrive3] = drivePowerL;
+				}
+				while (SensorValue[rightDrive] > targetLocationL)
+				{
+					motor[leftDrive1] = drivePowerL;
+					motor[leftDrive2] = drivePowerL;
+					motor[leftDrive3] = drivePowerL;
+				}
 			}
 		}
 	}
