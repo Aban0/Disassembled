@@ -122,33 +122,60 @@ void mongoDown()
 	motor[mongoLeft] = -127;
 }
 
+// Placeholder platform toggle system
+bool platform = false;
 
 void blueFlagSide()
 {
+	if (platform == true)
+	{
 
+	}
+	else if (platform == false)
+	{
+
+	}
 }
 
 void redFlagSide()
 {
+	if (platform == true)
+	{
 
+	}
+	else if (platform == false)
+	{
+
+	}
 }
 
 void blueFarSide()
 {
+	if (platform == true)
+	{
 
+	}
+	else if (platform == false)
+	{
+
+	}
 }
 
 void redFarSide()
 {
+	if (platform == true)
+	{
 
+	}
+	else if (platform == false)
+	{
+
+	}
 }
 
 task autonomous()
 {
-	//flag
-	moveBackward();
-	wait1Msec(1750);
-	// Chooses which auton to run based on where jumper clips are placed
+	// Chooses which auton to run based on where jumper clips/potentiometers are placed
 	if (vexRT[dgtl5] != vexRT[dgtl6] == 1)
 	{
 		blueFlagSide();
@@ -283,7 +310,7 @@ task usercontrol()
 			// Left side
 			// Find error and integrate P into it
 			errorL = targetLocationL - abs(SensorValue[leftDrive]);   // Currently just P, we can add on in the future
-			drivePowerL += (int)(KpL*errorL);
+			drivePowerL = (int)(KpL*errorL);
 
 			// Change drive power accoring to sensor value
 			if (errorL > 5)
