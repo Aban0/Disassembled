@@ -204,11 +204,13 @@ task autonomous()
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
 
+// Global variables
 bool brakes = false;
 int targetLocationR = 0;
 int targetLocationL = 0;
 
-task pid()
+// This task is run when the parking brake is enabled
+task parkingBrake()
 {
 	// Declaring Variables
 	int KpR = .9;
@@ -220,80 +222,48 @@ task pid()
 
 	while (brakes == true)
 	{
-		// PID Parking Brake
 		if (vexRT[Btn8R] == 1)
 		{
 			brakes = !brakes;
+			stopTask(parkingBrake);
 		}
 
-		// Right side
 		// Find error and integrate P into it
 		errorR = SensorValue[rightDrive] - targetLocationR;  // Currently just P, we can add on in the future
 		drivePowerR = (int)(KpR*errorR);
+		errorL = SensorValue[leftDrive] - targetLocationL;
+		drivePowerL = (int)(KpL*errorL);
 
-		// Change drive power accoring to sensor value
-		while (SensorValue[rightDrive] < targetLocationR)
+		// Change drive power accoring to sensor values
+		while (SensorValue[rightDrive] != targetLocationR || SensorValue[leftDrive] != targetLocationL)
 		{
 			if (vexRT[Btn8R] == 1)
 			{
 				brakes = !brakes;
-			}
-			motor[rightDrive1] = -drivePowerR;
-			motor[rightDrive2] = -drivePowerR;
-			motor[rightDrive3] = -drivePowerR;
-		}
-		while (SensorValue[rightDrive] > targetLocationR)
-		{
-			if (vexRT[Btn8R] == 1)
-			{
-				brakes = !brakes;
+				stopTask(parkingBrake);
 			}
 			motor[rightDrive1] = drivePowerR;
 			motor[rightDrive2] = drivePowerR;
 			motor[rightDrive3] = drivePowerR;
+			motor[leftDrive1] = drivePowerL;
+			motor[leftDrive2] = drivePowerL;
+			motor[leftDrive3] = drivePowerL;
 		}
-	}
-	// Left side
-	// Find error and integrate P into it
-	errorL = SensorValue[leftDrive] - targetLocationL;   // Currently just P, we can add on in the future
-	drivePowerL = (int)(KpL*errorL);
-
-	// Change drive power accoring to sensor value
-	while (SensorValue[leftDrive] < targetLocationL)
-	{
-		if (vexRT[Btn8R] == 1)
-		{
-			brakes = !brakes;
-		}
-		motor[leftDrive1] = drivePowerL;
-		motor[leftDrive2] = drivePowerL;
-		motor[leftDrive3] = drivePowerL;
-	}
-	while (SensorValue[rightDrive] > targetLocationL)
-	{
-		if (vexRT[Btn8R] == 1)
-		{
-			brakes = !brakes;
-		}
-		motor[leftDrive1] = -drivePowerL;
-		motor[leftDrive2] = -drivePowerL;
-		motor[leftDrive3] = -drivePowerL;
 	}
 }
-
 
 task usercontrol()
 {
 	while (true)
 	{
 		// Drive controls
-		if (vexRT(Ch2) > 3 || vexRT(Ch2) < -3)
+		if (vexRT(Ch2) > 5 || vexRT(Ch2) < -5)
 		{
 			motor[rightDrive1] = vexRT[Ch2];
 			motor[rightDrive2] = vexRT[Ch2];
 			motor[rightDrive3] = vexRT[Ch2];
 		}
-		if (vexRT(Ch3) > 3 || vexRT(Ch3) < -3)
+		if (vexRT(Ch3) > 5 || vexRT(Ch3) < -5)
 		{
 			motor[leftDrive1] = vexRT[Ch3];
 			motor[leftDrive2] = vexRT[Ch3];
@@ -301,7 +271,7 @@ task usercontrol()
 		}
 
 		// H-Drive controls
-		if (vexRT(Ch4) > 3 || vexRT(Ch4) < -3)
+		if (vexRT(Ch4) > 5 || vexRT(Ch4) < -5)
 		{
 			motor[hDrive] = vexRT[Ch4];
 		}
@@ -337,11 +307,11 @@ task usercontrol()
 			motor[mongoLeft] = 0;
 		}
 
-		// PID Parking Brake
+		// Start parking brake task and set parking brake to the encoder's current values
 		if (vexRT[Btn8D] == 1)
 		{
 			brakes = !brakes;
-			startTask(pid);
+			startTask(parkingBrake);
 			targetLocationR = SensorValue[rightDrive];
 			targetLocationL = SensorValue[leftDrive];
 		}
