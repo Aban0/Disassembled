@@ -207,11 +207,11 @@ task autonomous()
 task usercontrol()
 {
 	// Declaring Variables
-	int KpR = 0;
+	int KpR = .9;
+	int KpL = .9;
 	int errorR = 0;
 	int targetLocationR = 0;
 	int drivePowerR = 0;
-	int KpL = 0;
 	int errorL = 0;
 	int targetLocationL = 0;
 	int drivePowerL = 0;
@@ -281,7 +281,7 @@ task usercontrol()
 		while (brakes == true)
 		{
 			// PID Parking Brake
-			if (vexRT[Btn8D] == 1)
+			if (vexRT[Btn8R] == 1)
 			{
 				brakes = !brakes;
 			}
@@ -292,42 +292,52 @@ task usercontrol()
 			drivePowerR = (int)(KpR*errorR);
 
 			// Change drive power accoring to sensor value
-			if (errorR > 5)
+			while (SensorValue[rightDrive] < targetLocationR)
 			{
-				while (SensorValue[rightDrive] < targetLocationR)
+				if (vexRT[Btn8R] == 1)
 				{
-					motor[rightDrive1] = drivePowerR;
-					motor[rightDrive2] = drivePowerR;
-					motor[rightDrive3] = drivePowerR;
+					brakes = !brakes;
 				}
-				while (SensorValue[rightDrive] > targetLocationR)
-				{
-					motor[rightDrive1] = drivePowerR;
-					motor[rightDrive2] = drivePowerR;
-					motor[rightDrive3] = drivePowerR;
-				}
+				motor[rightDrive1] = -drivePowerR;
+				motor[rightDrive2] = -drivePowerR;
+				motor[rightDrive3] = -drivePowerR;
 			}
-			// Left side
-			// Find error and integrate P into it
-			errorL = targetLocationL - abs(SensorValue[leftDrive]);   // Currently just P, we can add on in the future
-			drivePowerL = (int)(KpL*errorL);
+			while (SensorValue[rightDrive] > targetLocationR)
+			{
+				if (vexRT[Btn8R] == 1)
+				{
+					brakes = !brakes;
+				}
+				motor[rightDrive1] = drivePowerR;
+				motor[rightDrive2] = drivePowerR;
+				motor[rightDrive3] = drivePowerR;
+			}
+		}
+		// Left side
+		// Find error and integrate P into it
+		errorL = targetLocationL - abs(SensorValue[leftDrive]);   // Currently just P, we can add on in the future
+		drivePowerL = (int)(KpL*errorL);
 
-			// Change drive power accoring to sensor value
-			if (errorL > 5)
+		// Change drive power accoring to sensor value
+		while (SensorValue[leftDrive] < targetLocationL)
+		{
+			if (vexRT[Btn8R] == 1)
 			{
-				while (SensorValue[leftDrive] < targetLocationL)
-				{
-					motor[leftDrive1] = drivePowerL;
-					motor[leftDrive2] = drivePowerL;
-					motor[leftDrive3] = drivePowerL;
-				}
-				while (SensorValue[rightDrive] > targetLocationL)
-				{
-					motor[leftDrive1] = drivePowerL;
-					motor[leftDrive2] = drivePowerL;
-					motor[leftDrive3] = drivePowerL;
-				}
+				brakes = !brakes;
 			}
+			motor[leftDrive1] = drivePowerL;
+			motor[leftDrive2] = drivePowerL;
+			motor[leftDrive3] = drivePowerL;
+		}
+		while (SensorValue[rightDrive] > targetLocationL)
+		{
+			if (vexRT[Btn8R] == 1)
+			{
+				brakes = !brakes;
+			}
+			motor[leftDrive1] = -drivePowerL;
+			motor[leftDrive2] = -drivePowerL;
+			motor[leftDrive3] = -drivePowerL;
 		}
 	}
 }
