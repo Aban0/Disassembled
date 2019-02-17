@@ -4,8 +4,8 @@
 #pragma config(Motor,  port2,           leftDrive1,    tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port3,           leftDrive2,    tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port4,           leftDrive3,    tmotorVex393_MC29, openLoop, reversed)
-#pragma config(Motor,  port5,           rightLift,     tmotorVex393_MC29, openLoop, reversed)
-#pragma config(Motor,  port6,           leftLift,      tmotorVex393_MC29, openLoop, reversed)
+#pragma config(Motor,  port5,           hDrive,        tmotorVex393_MC29, openLoop)
+#pragma config(Motor,  port6,           lift,          tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port7,           rightDrive3,   tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port8,           rightDrive2,   tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port9,           rightDrive1,   tmotorVex393_MC29, openLoop, reversed)
@@ -206,21 +206,24 @@ task usercontrol()
 			motor[leftDrive3] = vexRT[Ch3];
 		}
 
+		// H-Drive controls
+		if (vexRT(Ch4) > 3 || vexRT(Ch4) < -3)
+		{
+			motor[hDrive] = vexRT[Ch4];
+		}
+
 		// Six bar controls
 		if (vexRT[Btn6U] == 1)
 		{
-			motor[rightLift] = 127;
-			motor[leftLift] = 127;
+			motor[lift] = 127;
 		}
 		else if (vexRT[Btn6D] == 1)
 		{
-			motor[rightLift] = -127;
-			motor[leftLift] = -127;
+			motor[lift] = -127;
 		}
 		else
 		{
-			motor[rightLift] = 0;
-			motor[leftLift] = 0;
+			motor[lift] = 0;
 		}
 
 		// Four bar controls
