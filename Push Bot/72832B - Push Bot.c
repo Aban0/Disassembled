@@ -275,9 +275,6 @@ task usercontrol()
 			{
 				drivePowerR = 0;
 			}
-			motor[rightDrive1] = drivePowerR;
-			motor[rightDrive2] = drivePowerR;
-			motor[rightDrive3] = drivePowerR;
 
 			// Left side
 			// PID Parking Brake left side
@@ -294,9 +291,6 @@ task usercontrol()
 			{
 				drivePowerL = 0;
 			}
-			motor[leftDrive1] = drivePowerL;
-			motor[leftDrive2] = drivePowerL;
-			motor[leftDrive3] = drivePowerL;
 		}
 	}
 }
