@@ -208,6 +208,8 @@ task autonomous()
 bool brakes = false;
 int targetLocationR = 0;
 int targetLocationL = 0;
+int drivePowerR = 0;
+int drivePowerL = 0;
 
 // This task is run when the parking brake is enabled
 task parkingBrake()
@@ -217,8 +219,6 @@ task parkingBrake()
 	int KpL = .9;
 	int errorR = 0;
 	int errorL = 0;
-	int drivePowerR = 0;
-	int drivePowerL = 0;
 
 	while (brakes == true)
 	{
@@ -233,22 +233,6 @@ task parkingBrake()
 		drivePowerR = (int)(KpR*errorR);
 		errorL = SensorValue[leftDrive] - targetLocationL;
 		drivePowerL = (int)(KpL*errorL);
-
-		// Change drive power accoring to sensor values
-		while (SensorValue[rightDrive] != targetLocationR || SensorValue[leftDrive] != targetLocationL)
-		{
-			if (vexRT[Btn8R] == 1)
-			{
-				brakes = !brakes;
-				stopTask(parkingBrake);
-			}
-			motor[rightDrive1] = drivePowerR;
-			motor[rightDrive2] = drivePowerR;
-			motor[rightDrive3] = drivePowerR;
-			motor[leftDrive1] = drivePowerL;
-			motor[leftDrive2] = drivePowerL;
-			motor[leftDrive3] = drivePowerL;
-		}
 	}
 }
 
@@ -314,6 +298,22 @@ task usercontrol()
 			startTask(parkingBrake);
 			targetLocationR = SensorValue[rightDrive];
 			targetLocationL = SensorValue[leftDrive];
+
+			// Change drive power accoring to sensor values
+			while (SensorValue[rightDrive] != targetLocationR || SensorValue[leftDrive] != targetLocationL)
+			{
+				if (vexRT[Btn8R] == 1)
+				{
+					brakes = !brakes;
+					stopTask(parkingBrake);
+				}
+				motor[rightDrive1] = drivePowerR;
+				motor[rightDrive2] = drivePowerR;
+				motor[rightDrive3] = drivePowerR;
+				motor[leftDrive1] = drivePowerL;
+				motor[leftDrive2] = drivePowerL;
+				motor[leftDrive3] = drivePowerL;
+			}
 		}
 	}
 }
