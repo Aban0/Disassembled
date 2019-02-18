@@ -280,53 +280,31 @@ task usercontrol()
 
 		while (brakes == true)
 		{
-			// PID Parking Brake
-			if (vexRT[Btn8D] == 1)
+			if (vexRT[Btn8R] == 1)
 			{
 				brakes = !brakes;
 			}
 
-			// Right side
 			// Find error and integrate P into it
-			errorR = targetLocationR - abs(SensorValue[rightDrive]);  // Currently just P, we can add on in the future
+			errorR = SensorValue[rightDrive] - targetLocationR;  // Currently just P, we can add on in the future
 			drivePowerR = (int)(KpR*errorR);
-
-			// Change drive power accoring to sensor value
-			if (errorR > 5)
-			{
-				while (SensorValue[rightDrive] < targetLocationR)
-				{
-					motor[rightDrive1] = drivePowerR;
-					motor[rightDrive2] = drivePowerR;
-					motor[rightDrive3] = drivePowerR;
-				}
-				while (SensorValue[rightDrive] > targetLocationR)
-				{
-					motor[rightDrive1] = drivePowerR;
-					motor[rightDrive2] = drivePowerR;
-					motor[rightDrive3] = drivePowerR;
-				}
-			}
-			// Left side
-			// Find error and integrate P into it
-			errorL = targetLocationL - abs(SensorValue[leftDrive]);   // Currently just P, we can add on in the future
+			errorL = SensorValue[leftDrive] - targetLocationL;
 			drivePowerL = (int)(KpL*errorL);
 
+
 			// Change drive power accoring to sensor value
-			if (errorL > 5)
+			while (SensorValue[rightDrive] != targetLocationR || SensorValue[leftDrive] != targetLocationL)
 			{
-				while (SensorValue[leftDrive] < targetLocationL)
+				if (vexRT[Btn8R] == 1)
 				{
-					motor[leftDrive1] = drivePowerL;
-					motor[leftDrive2] = drivePowerL;
-					motor[leftDrive3] = drivePowerL;
+					brakes = !brakes;
 				}
-				while (SensorValue[rightDrive] > targetLocationL)
-				{
-					motor[leftDrive1] = drivePowerL;
-					motor[leftDrive2] = drivePowerL;
-					motor[leftDrive3] = drivePowerL;
-				}
+				motor[rightDrive1] = drivePowerR;
+				motor[rightDrive2] = drivePowerR;
+				motor[rightDrive3] = drivePowerR;
+				motor[leftDrive1] = drivePowerL;
+				motor[leftDrive2] = drivePowerL;
+				motor[leftDrive3] = drivePowerL;
 			}
 		}
 	}
