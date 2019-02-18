@@ -11,16 +11,16 @@
 #pragma config(Motor,  port9,           rightDrive1,   tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port10,          mongoRight,    tmotorVex393_HBridge, openLoop)
 
-	// Declaring Variables
-	int KpR = 0;
-	int errorR = 0;
-	int targetLocationR = 0;
-	int drivePowerR = 0;
-	int KpL = 0;
-	int errorL = 0;
-	int targetLocationL = 0;
-	int drivePowerL = 0;
-	bool brakes = false;
+// Declaring Variables
+int KpR = .5;
+int errorR = 0;
+int targetLocationR = 0;
+int drivePowerR = 0;
+int KpL = .5;
+int errorL = 0;
+int targetLocationL = 0;
+int drivePowerL = 0;
+bool brakes = false;
 
 task main()
 {
@@ -97,7 +97,8 @@ task main()
 			targetLocationL = SensorValue[leftDrive];
 		}
 
-		while (brakes == true)
+		// Change drive power accoring to sensor value
+		while (brakes == true && SensorValue[rightDrive] != targetLocationR || SensorValue[leftDrive] != targetLocationL)
 		{
 			if (vexRT[Btn8R] == 1)
 			{
@@ -110,21 +111,13 @@ task main()
 			errorL = SensorValue[leftDrive] - targetLocationL;
 			drivePowerL = KpL*errorL;
 
-
-			// Change drive power accoring to sensor value
-			while (SensorValue[rightDrive] != targetLocationR || SensorValue[leftDrive] != targetLocationL)
-			{
-				if (vexRT[Btn8R] == 1)
-				{
-					brakes = !brakes;
-				}
-				motor[rightDrive1] = drivePowerR;
-				motor[rightDrive2] = drivePowerR;
-				motor[rightDrive3] = drivePowerR;
-				motor[leftDrive1] = drivePowerL;
-				motor[leftDrive2] = drivePowerL;
-				motor[leftDrive3] = drivePowerL;
-			}
+			// Set drive value to move back into position if needed
+			motor[rightDrive1] = drivePowerR;
+			motor[rightDrive2] = drivePowerR;
+			motor[rightDrive3] = drivePowerR;
+			motor[leftDrive1] = drivePowerL;
+			motor[leftDrive2] = drivePowerL;
+			motor[leftDrive3] = drivePowerL;
 		}
 	}
 }
