@@ -18,10 +18,6 @@ int targetLocationL = 0;
 int drivePowerR = 0;
 int drivePowerL = 0;
 
-
-
-
-
 // This task is run when the parking brake is enabled
 task parkingBrake()
 {
@@ -57,6 +53,10 @@ task parkingBrake()
 
 task main()
 {
+	// Clear encoders
+	SensorValue(rightDrive) = 0;
+	SensorValue(leftDrive) = 0;
+
 	// Logging important values for debugging
 	datalogDataGroupStart();
 	datalogAddValue( 4, rightDrive );
