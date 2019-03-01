@@ -89,35 +89,40 @@ task main()
 			motor[mongoLeft] = 0;
 		}
 
+		/*
+
 		// PID Parking Brake
 		if (vexRT[Btn8D] == 1)
 		{
-			brakes = !brakes;
-			targetLocationR = SensorValue[rightDrive];
-			targetLocationL = SensorValue[leftDrive];
+		brakes = !brakes;
+		targetLocationR = SensorValue[rightDrive];
+		targetLocationL = SensorValue[leftDrive];
 		}
 
 		// Change drive power accoring to sensor value
 		while (brakes == true && SensorValue[rightDrive] != targetLocationR || SensorValue[leftDrive] != targetLocationL)
 		{
-			if (vexRT[Btn8R] == 1)
-			{
-				brakes = !brakes;
-			}
-
-			// Find error and integrate P into it
-			errorR = SensorValue[rightDrive] - targetLocationR;  // Currently just P, we can add on in the future
-			drivePowerR = KpR*errorR;
-			errorL = SensorValue[leftDrive] - targetLocationL;
-			drivePowerL = KpL*errorL;
-
-			// Set drive value to move back into position if needed
-			motor[rightDrive1] = drivePowerR;
-			motor[rightDrive2] = drivePowerR;
-			motor[rightDrive3] = drivePowerR;
-			motor[leftDrive1] = drivePowerL;
-			motor[leftDrive2] = drivePowerL;
-			motor[leftDrive3] = drivePowerL;
+		if (vexRT[Btn8R] == 1)
+		{
+		brakes = !brakes;
 		}
+
+		// Find error and integrate P into it
+		errorR = SensorValue[rightDrive] - targetLocationR;  // Currently just P, we can add on in the future
+		drivePowerR = KpR*errorR;
+		errorL = SensorValue[leftDrive] - targetLocationL;
+		drivePowerL = KpL*errorL;
+
+		// Set drive value to move back into position if needed
+		motor[rightDrive1] = drivePowerR;
+		motor[rightDrive2] = drivePowerR;
+		motor[rightDrive3] = drivePowerR;
+		motor[leftDrive1] = drivePowerL;
+		motor[leftDrive2] = drivePowerL;
+		motor[leftDrive3] = drivePowerL;
+		}
+		}
+
+		*/
 	}
 }
