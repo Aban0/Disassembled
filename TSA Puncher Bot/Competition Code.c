@@ -102,6 +102,18 @@ void rotateLeft()
 	motor[backLeft] = -127;
 }
 
+// Pitches puncher up
+void pUp()
+{
+	motor[adjuster] = 127;
+}
+
+// Pitches puncher down
+void pDown()
+{
+	motor[adjuster] = -127;
+}
+
 void stopDrive()
 {
 	motor[frontRight] = 0;
@@ -125,9 +137,56 @@ void stopAllMotors()
 	motor[puncherLeft] = 0;
 }
 
-task autonomous()
+// Auton Functions
+void blueNorth()
 {
 
+}
+
+void blueSouth()
+{
+
+}
+
+void redNorth()
+{
+
+}
+
+void redSouth()
+{
+
+}
+
+// Just in case no auton is selected
+void failSafe()
+{
+	// Keep this function blank
+}
+
+task autonomous()
+{
+	// Choose Auton
+	if (true)
+	{
+		blueNorth();
+	}
+	else if (false)
+	{
+		blueSouth();
+	}
+	else if (false)
+	{
+		redNorth();
+	}
+	else if (false)
+	{
+		redSouth();
+	}
+	else
+	{
+		failSafe();
+	}
 }
 
 /*---------------------------------------------------------------------------*/
