@@ -209,7 +209,7 @@ task usercontrol()
 		startTask (rightDrive);
 		startTask (leftDrive);
 
-		if (vexRT(Btn5U) == 1)
+		if (vexRT(Btn5U) == 1 && SensorValue(adjusterPot) < 40)
 		{
 			motor[intake] = 127;
 		}
