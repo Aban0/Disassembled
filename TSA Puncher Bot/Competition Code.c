@@ -199,32 +199,15 @@ task autonomous()
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
 
-#include "TSA Bot Task Library";
+#include "TSA Bot Task Library.c";
+
 
 task usercontrol()
 {
 	while (true)
 	{
-
-		// Drive controls
-		if (vexRT(Ch2) > 10 || vexRT(Ch2) < -10 || vexRT(Ch3) > 10 || vexRT(Ch3) < -10)
-		{
-			motor[frontRight] = vexRT[Ch2];
-			motor[midRight] = vexRT[Ch2];
-			motor[backRight] = vexRT[Ch2];
-			motor[frontLeft] = vexRT[Ch3];
-			motor[midLeft] = vexRT[Ch3];
-			motor[backLeft] = vexRT[Ch3];
-		}
-		else
-		{
-			motor[frontRight] = 0;
-			motor[midRight] = 0;
-			motor[backRight] = 0;
-			motor[frontLeft] = 0;
-			motor[midLeft] = 0;
-			motor[backLeft] = 0;
-		}
+		startTask (rightDrive);
+		startTask (leftDrive);
 
 		if (vexRT(Btn5U) == 1)
 		{
