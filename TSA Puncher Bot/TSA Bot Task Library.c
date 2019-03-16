@@ -1,7 +1,7 @@
 task rightDrive()
 {
 	// Drive controls with deadzone
-	if (vexRT(Ch2) > 10 || vexRT(Ch2) < -10)
+	if (vexRT(Ch2) > 15 || vexRT(Ch2) < -15)
 	{
 		motor[frontRight] = vexRT[Ch2];
 		motor[midRight] = vexRT[Ch2];
@@ -17,7 +17,7 @@ task rightDrive()
 
 task leftDrive()
 {
-	if (vexRT(Ch3) > 10 || vexRT(Ch3) < -10)
+	if (vexRT(Ch3) > 15 || vexRT(Ch3) < -15)
 	{
 		motor[frontLeft] = vexRT[Ch3];
 		motor[midLeft] = vexRT[Ch3];

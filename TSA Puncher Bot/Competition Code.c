@@ -201,15 +201,21 @@ task autonomous()
 
 #include "TSA Bot Task Library.c";
 
-
 task usercontrol()
 {
+
+	datalogDataGroupStart();
+	datalogAddValue( 0, motor[midRight]);
+	datalogAddValue( 1, motor[midLeft]);
+	datalogAddValue( 2, SensorValue[adjusterPot]);
+	datalogDataGroupEnd();
+
 	while (true)
 	{
 		startTask (rightDrive);
 		startTask (leftDrive);
 
-		if (vexRT(Btn5U) == 1 && SensorValue(adjusterPot) < 40)
+		if (vexRT(Btn5U) == 1)
 		{
 			motor[intake] = 127;
 		}
@@ -233,7 +239,7 @@ task usercontrol()
 			motor[puncherLeft] = 0;
 		}
 
-		if (vexRT(Btn8U) == 1)
+		if (vexRT(Btn8U) == 1  && SensorValue(adjusterPot) < 40)
 		{
 			motor[adjuster] = 60;
 		}
