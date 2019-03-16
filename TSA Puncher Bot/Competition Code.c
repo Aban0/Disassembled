@@ -137,10 +137,64 @@ void stopAllMotors()
 	motor[puncherLeft] = 0;
 }
 
+// Auton Decision Variables
+int autonPot = 0;
+int platPot = 0;
+
 // Auton Functions
 void blueNorth()
 {
-
+	if (platPot == true)
+	{
+	// move forward
+	// roll intake in
+	// move back
+	// rotate left
+	// shoot
+	// roll intake in
+	// pup
+	// shoot
+	// pdown
+	// move forward
+	// move back
+	// rotate right
+	// move forward
+	// scraper if we have one
+	// intake in
+	// rotate left 30 - 45 degrees
+	// shoot
+	// roll intake in
+	// pup
+	// shoot
+	// pdown
+	// move forward
+	// rotate left
+	// move forward
+}
+else
+{
+	// move forward
+	// roll intake in
+	// move back
+	// rotate left
+	// shoot
+	// roll intake in
+	// pup
+	// shoot
+	// pdown
+	// move forward
+	// move back
+	// rotate right
+	// move forward
+	// scraper if we have one
+	// intake in
+	// rotate left
+	// shoot
+	// roll intake in
+	// pup
+	// shoot
+	// pdown
+}
 }
 
 void blueSouth()
@@ -199,7 +253,8 @@ task autonomous()
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
 
-#include "TSA Bot Task Library.c";
+#include "Deadzone Drive.c";
+#include "PID Parking Brake.c";
 
 task usercontrol()
 {
