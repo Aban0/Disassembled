@@ -239,7 +239,7 @@ task usercontrol()
 			motor[puncherLeft] = 0;
 		}
 
-		if (vexRT(Btn8U) == 1  && SensorValue(adjusterPot) < 40)
+		if (vexRT(Btn8U) == 1  && SensorValue(adjusterPot) < 250)
 		{
 			motor[adjuster] = 60;
 		}
