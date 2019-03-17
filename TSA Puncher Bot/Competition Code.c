@@ -144,7 +144,7 @@ int autonPot = 0;
 int platPot = 0;
 
 // Auton Functions
-void blueNorth()
+void redNorth()
 {
 	if (platPot == true)
 	{
@@ -237,7 +237,7 @@ void blueNorth()
 	}
 }
 
-void blueSouth()
+void redSouth()
 {
 	if (platPot == false)
 	{
@@ -249,7 +249,7 @@ void blueSouth()
 	}
 }
 
-void redNorth()
+void blueNorth()
 {
 	if (platPot == false)
 	{
@@ -342,7 +342,7 @@ void redNorth()
 	}
 }
 
-void redSouth()
+void blueSouth()
 {
 	if (platPot == false)
 	{

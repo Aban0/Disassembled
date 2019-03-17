@@ -3,14 +3,15 @@
 task pBrake()
 {
 	// Local Variables
-	int kP = 0;
+	int kP = 1;
 	int error;
 	int power;
 
 	while(brake == true)
 	{
 		error = setpoint - SensorValue(rightEnc); // Error is calculated
-		power = abs(error)*kP; // Proportional component is implemented
+		power = error*kP; // Proportional component is implemented
+		power = power*(-1);
 
 		// Deadband is set since integral and derivative components are not implemented
 		if(error > 20 || error < -20)
