@@ -1,4 +1,6 @@
 #pragma config(Sensor, in6,    adjusterPot,    sensorPotentiometer)
+#pragma config(Sensor, dgtl1,  rightEnc,       sensorQuadEncoder)
+#pragma config(Sensor, dgtl3,  leftEnc,        sensorQuadEncoder)
 #pragma config(Motor,  port1,           intake,        tmotorVex393TurboSpeed_HBridge, openLoop)
 #pragma config(Motor,  port2,           puncherLeft,   tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port3,           frontRight,    tmotorVex393HighSpeed_MC29, openLoop)
@@ -146,70 +148,91 @@ void blueNorth()
 {
 	if (platPot == true)
 	{
-	// move forward
-	// roll intake in
-	// move back
-	// rotate left
-	// shoot
-	// roll intake in
-	// pup
-	// shoot
-	// pdown
-	// move forward
-	// move back
-	// rotate right
-	// move forward
-	// scraper if we have one
-	// intake in
-	// rotate left 30 - 45 degrees
-	// shoot
-	// roll intake in
-	// pup
-	// shoot
-	// pdown
-	// move forward
-	// rotate left
-	// move forward
-}
-else
-{
-	// move forward
-	// roll intake in
-	// move back
-	// rotate left
-	// shoot
-	// roll intake in
-	// pup
-	// shoot
-	// pdown
-	// move forward
-	// move back
-	// rotate right
-	// move forward
-	// scraper if we have one
-	// intake in
-	// rotate left
-	// shoot
-	// roll intake in
-	// pup
-	// shoot
-	// pdown
-}
+		// move forward
+		// roll intake in
+		// move back
+		// rotate left
+		// shoot
+		// roll intake in
+		// pup
+		// shoot
+		// pdown
+		// move forward
+		// move back
+		// rotate right
+		// move forward
+		// scraper if we have one
+		// intake in
+		// rotate left 30 - 45 degrees
+		// shoot
+		// roll intake in
+		// pup
+		// shoot
+		// pdown
+		// move forward
+		// rotate left
+		// move forward
+	}
+	else
+	{
+		// move forward
+		// roll intake in
+		// move back
+		// rotate left
+		// shoot
+		// roll intake in
+		// pup
+		// shoot
+		// pdown
+		// move forward
+		// move back
+		// rotate right
+		// move forward
+		// scraper if we have one
+		// intake in
+		// rotate left
+		// shoot
+		// roll intake in
+		// pup
+		// shoot
+		// pdown
+	}
 }
 
 void blueSouth()
 {
+	if (platPot == false)
+	{
 
+	}
+	else
+	{
+
+	}
 }
 
 void redNorth()
 {
+	if (platPot == false)
+	{
 
+	}
+	else
+	{
+
+	}
 }
 
 void redSouth()
 {
+	if (platPot == false)
+	{
 
+	}
+	else
+	{
+
+	}
 }
 
 // Just in case no auton is selected
@@ -253,22 +276,36 @@ task autonomous()
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
 
+// Global Variables
+int setpoint;
+bool brake = false;
+
+// Included files
 #include "Deadzone Drive.c";
 #include "PID Parking Brake.c";
 
 task usercontrol()
 {
-
 	datalogDataGroupStart();
 	datalogAddValue( 0, motor[midRight]);
 	datalogAddValue( 1, motor[midLeft]);
 	datalogAddValue( 2, SensorValue[adjusterPot]);
+	datalogAddValue( 3, motor[adjuster]);
 	datalogDataGroupEnd();
 
 	while (true)
 	{
+		// Starts tasks from Deadzone Drive.c
 		startTask (rightDrive);
 		startTask (leftDrive);
+
+		if (vexRT(Btn7D) == 1)
+		{
+			setpoint = SensorValue(rightEnc); // Sets current location as the target for PID
+			startTask (pBrake);
+			brake = !brake; // Toggles brake on
+			wait1Msec(10); // Waits 10 miliseconds to prevent the toggle from switching off again before the button is released
+		}
 
 		if (vexRT(Btn5U) == 1)
 		{

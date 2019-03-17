@@ -1,7 +1,9 @@
+#pragma systemFile
+
 task rightDrive()
 {
-	// Drive controls with deadzone
-	if (vexRT(Ch2) > 15 || vexRT(Ch2) < -15)
+	// Drive controls with deadzone for the right drive/joystick
+	if (abs(vexRT[Ch2]) > 15)
 	{
 		motor[frontRight] = vexRT[Ch2];
 		motor[midRight] = vexRT[Ch2];
@@ -17,7 +19,8 @@ task rightDrive()
 
 task leftDrive()
 {
-	if (vexRT(Ch3) > 15 || vexRT(Ch3) < -15)
+	// Drive controls with deadzone for the left drive/joystick
+	if (abs(vexRT[Ch3]) > 15)
 	{
 		motor[frontLeft] = vexRT[Ch3];
 		motor[midLeft] = vexRT[Ch3];
