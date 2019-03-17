@@ -177,6 +177,8 @@ void blueNorth()
 		// shoot
 		// pdown
 		// move forward
+
+		// Park on platform and shoot middle top flag
 		// move back
 		// rotate right
 		// move back
@@ -193,27 +195,45 @@ void blueNorth()
 	}
 	else
 	{
+		// move back
 		// move forward
 		// roll intake in
-		// move back
-		// rotate left
+		// rotate left 30 - 45 degrees
 		// shoot
 		// roll intake in
 		// pup
 		// shoot
 		// pdown
+		// move forward
+		// rotate left
+		// move forward
+		// move back
+		// rotate left
+		// move forward
+		// scraper down
+		// move forward
+		// intake out
+		// scraper up
+		// intake in
 		// move forward
 		// move back
 		// rotate right
-		// move forward
-		// scraper if we have one
-		// intake in
-		// rotate left
 		// shoot
 		// roll intake in
 		// pup
 		// shoot
 		// pdown
+		// move forward
+
+		// Get in a good position for driver and  try shooting middle flags
+		// intake in
+		// move back
+		// rotate right 30 - 45 degrees
+		// shoot
+		// intake in
+		// pup
+		// shoot
+		// intake in
 	}
 }
 
@@ -233,11 +253,92 @@ void redNorth()
 {
 	if (platPot == false)
 	{
+		// move back
+		// move forward
+		// roll intake in
+		// rotate right 30 - 45 degrees
+		// shoot
+		// roll intake in
+		// pup
+		// shoot
+		// pdown
+		// move forward
+		// rotate right
+		// move forward
+		// move back
+		// rotate right
+		// move forward
+		// scraper down
+		// move forward
+		// intake out
+		// scraper up
+		// intake in
+		// move forward
+		// move back
+		// rotate left
+		// shoot
+		// roll intake in
+		// pup
+		// shoot
+		// pdown
+		// move forward
 
+		// Park on platform and shoot middle top flag
+		// move back
+		// rotate left
+		// move back
+		// move forward
+		// scraper down
+		// move back
+		// intake in
+		// scraper up
+		// rotate left 15-25 degrees
+		// move forward
+		// rotate right
+		// pup
+		// shoot
 	}
 	else
 	{
+		// move back
+		// move forward
+		// roll intake in
+		// rotate right 30 - 45 degrees
+		// shoot
+		// roll intake in
+		// pup
+		// shoot
+		// pdown
+		// move forward
+		// rotate right
+		// move forward
+		// move back
+		// rotate right
+		// move forward
+		// scraper down
+		// move forward
+		// intake out
+		// scraper up
+		// intake in
+		// move forward
+		// move back
+		// rotate left
+		// shoot
+		// roll intake in
+		// pup
+		// shoot
+		// pdown
+		// move forward
 
+		// Get in a good position for driver and  try shooting middle flags
+		// intake in
+		// move back
+		// rotate left 30 - 45 degrees
+		// shoot
+		// intake in
+		// pup
+		// shoot
+		// intake in
 	}
 }
 
