@@ -99,6 +99,25 @@ void rotateLeft()
 	motor[backLeft] = -127;
 }
 
+void intakeIn()
+{
+	motor[intake] = 127;
+}
+
+void intakeOut()
+{
+	motor[intake] = -127;
+}
+
+void shoot()
+{
+	motor[puncherRight] = 127;
+	motor[puncherLeft] = 127;
+	wait1Msec(1000);
+	motor[puncherRight] = 0;
+	motor[puncherLeft] = 0;
+}
+
 // Pitches puncher up
 void pUp()
 {
@@ -146,42 +165,162 @@ void redNorth()
 		while(SensorValue(rightEnc) < 1000)
 		{
 			moveForward();
+			intakeIn();
+		}
+		stopAllMotors();
+		SensorValue(rightEnc) = 0;
+
+		while(SensorValue(rightEnc) < 400)
+		{
+			rotateLeft();
+		}
+		stopDrive();
+
+		shoot();
+
+		intakeIn();
+		pUp();
+		wait1Msec(1000);
+		stopAllMotors();
+
+		shoot();
+
+		// pdown
+
+		SensorValue(rightEnc) = 0;
+
+		while(SensorValue(rightEnc) < 1000)
+		{
+			moveForward();
 		}
 		stopDrive();
 		SensorValue(rightEnc) = 0;
 
-		// move forward
-		// roll intake in
-		// rotate left 30 - 45 degrees
-		// shoot
-		// roll intake in
-		// pup
-		// shoot
-		// pdown
-		// move forward
-		// rotate left
-		// move forward
-		// move back
-		// rotate left
-		// move forward
+		while(SensorValue(rightEnc) < 600)
+		{
+			rotateLeft();
+		}
+		stopDrive();
+		SensorValue(rightEnc) = 0;
+
+		while(SensorValue(rightEnc) < 500)
+		{
+			moveForward();
+		}
+		stopDrive();
+		SensorValue(rightEnc) = 0;
+
+		while(SensorValue(rightEnc) > -1000)
+		{
+			moveBack();
+		}
+		stopDrive();
+		SensorValue(rightEnc) = 0;
+
+		while(SensorValue(rightEnc) < 500)
+		{
+			rotateLeft();
+		}
+		stopDrive();
+		SensorValue(rightEnc) = 0;
+
+		while(SensorValue(rightEnc) < 1000)
+		{
+			moveForward();
+		}
+		stopDrive();
+		SensorValue(rightEnc) = 0;
+
 		// scraper down
-		// move forward
-		// intake out
+
+		while(SensorValue(rightEnc) > -200)
+		{
+			moveBack();
+			intakeIn();
+		}
+		stopAllMotors();
+		SensorValue(rightEnc) = 0;
+
 		// scraper up
-		// intake in
-		// move forward
-		// move back
-		// rotate right
-		// shoot
-		// roll intake in
-		// pup
-		// shoot
-		// pdown
-		// move forward
+
+		while(SensorValue(rightEnc) > -1000)
+		{
+			rotateRight();
+		}
+		stopDrive();
+		SensorValue(rightEnc) = 0;
+
+		shoot();
+		pDown();
+		wait1Msec(500);
+
+		while(SensorValue(rightEnc) < 1000)
+		{
+			rotateLeft();
+			intakeIn();
+		}
+		stopAllMotors();
+		SensorValue(rightEnc) = 0;
+
+		while(SensorValue(rightEnc) < 3000)
+		{
+			moveForward();
+			intakeOut();
+		}
+		stopAllMotors();
+		SensorValue(rightEnc) = 0;
+
+		intakeIn();
+
+		while(SensorValue(rightEnc) > -100)
+		{
+			moveBack();
+		}
+		stopDrive();
+		SensorValue(rightEnc) = 0;
+
+		while(SensorValue(rightEnc) > -500)
+		{
+			rotateRight();
+		}
+		stopDrive();
+		SensorValue(rightEnc) = 0;
+
+		shoot();
+
+		while(SensorValue(rightEnc) < 1000)
+		{
+			moveForward();
+		}
+		stopAllMotors();
+		SensorValue(rightEnc) = 0;
+
+		while(SensorValue(rightEnc) > -1000)
+		{
+			moveBack();
+		}
+		stopDrive();
+		SensorValue(rightEnc) = 0;
+
+		shoot();
+		pUp();
+		wait1Msec(500);
 
 		// Park on platform and shoot middle top flag
-		// move back
-		// rotate right
+		while(SensorValue(rightEnc) > -2000)
+		{
+			moveBack();
+		}
+		stopDrive();
+		SensorValue(rightEnc) = 0;
+
+		while(SensorValue(rightEnc) > -500)
+		{
+			rotateRight();
+		}
+		stopDrive();
+		SensorValue(rightEnc) = 0;
+
 		// move back
 		// move forward
 		// scraper down
@@ -524,7 +663,7 @@ void failSafe()
 task autonomous()
 {
 	// Choose Auton
-	if (true)
+	if (autonPot == true)
 	{
 		blueNorth();
 	}
