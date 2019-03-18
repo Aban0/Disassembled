@@ -219,13 +219,13 @@ void redNorth()
 		// move back
 		// rotate right
 		// shoot
-		// roll intake in
+		// intake in
 		// pup
 		// shoot
 		// pdown
 		// move forward
 
-		// Get in a good position for driver and  try shooting middle flags
+		// Get in a good position for driver and try shooting middle flags
 		// intake in
 		// move back
 		// rotate right 30 - 45 degrees
@@ -241,11 +241,91 @@ void redSouth()
 {
 	if (platPot == false)
 	{
+		// move forward
+		// intake in
+		// rotate left 45 degrees
+		// shoot
+		// intake in
+		// pup
+		// shoot
+		// pdown
+		// rotate right 45 degrees
+		// move back
+		// rotate right
+		// move forward
+		// rotate left
+		// move forward
+		// scraper down
+		// move back
+		// intake in
+		// scraper up
+		// rotate left ~50 degrees
+		// shoot
+		// intake in
+		// pup
+		// shoot
+		// rotate right ~50 degrees
+		// move forward
+		// intake out
+		// move back
+		// rotate left
+		// move forward
+		// scraper down
+		// move back
+		// intake in
+		// scraper up
+		// rotate left 45 degrees
+		// shoot
+		// pdown
 
+		// Park on platform
+		// move back
+		// rotate right 45 degrees
+		// move back
+		// move forward
 	}
 	else
 	{
+		// move forward
+		// intake in
+		// rotate left 45 degrees
+		// shoot
+		// intake in
+		// pup
+		// shoot
+		// pdown
+		// rotate right 45 degrees
+		// move back
+		// rotate right
+		// move forward
+		// rotate left
+		// move forward
+		// scraper down
+		// move back
+		// intake in
+		// scraper up
+		// rotate left ~50 degrees
+		// shoot
+		// intake in
+		// pup
+		// shoot
+		// rotate right ~50 degrees
+		// move forward
+		// intake out
+		// move back
+		// rotate left
+		// move forward
+		// scraper down
+		// move back
+		// intake in
+		// scraper up
+		// rotate left 45 degrees
+		// shoot
+		// pdown
 
+		// Get in a good position for driver
+		// move back
+		// rotate right ~135 degrees
 	}
 }
 
@@ -346,11 +426,91 @@ void blueSouth()
 {
 	if (platPot == false)
 	{
+		// move forward
+		// intake in
+		// rotate right 45 degrees
+		// shoot
+		// intake in
+		// pup
+		// shoot
+		// pdown
+		// rotate left 45 degrees
+		// move back
+		// rotate left
+		// move forward
+		// rotate right
+		// move forward
+		// scraper down
+		// move back
+		// intake in
+		// scraper up
+		// rotate right ~50 degrees
+		// shoot
+		// intake in
+		// pup
+		// shoot
+		// rotate left ~50 degrees
+		// move forward
+		// intake out
+		// move back
+		// rotate right
+		// move forward
+		// scraper down
+		// move back
+		// intake in
+		// scraper up
+		// rotate right 45 degrees
+		// shoot
+		// pdown
 
+		// Park on platform
+		// move back
+		// rotate left 45 degrees
+		// move back
+		// move forward
 	}
 	else
 	{
+		// move forward
+		// intake in
+		// rotate right 45 degrees
+		// shoot
+		// intake in
+		// pup
+		// shoot
+		// pdown
+		// rotate left 45 degrees
+		// move back
+		// rotate left
+		// move forward
+		// rotate right
+		// move forward
+		// scraper down
+		// move back
+		// intake in
+		// scraper up
+		// rotate right ~50 degrees
+		// shoot
+		// intake in
+		// pup
+		// shoot
+		// rotate left ~50 degrees
+		// move forward
+		// intake out
+		// move back
+		// rotate right
+		// move forward
+		// scraper down
+		// move back
+		// intake in
+		// scraper up
+		// rotate right 45 degrees
+		// shoot
+		// pdown
 
+		// Get in a good position for driver
+		// move back
+		// rotate left ~135 degrees
 	}
 }
 
