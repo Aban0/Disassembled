@@ -45,13 +45,8 @@ void pre_auton()
 	// manage all user created tasks if set to false.
 	bStopTasksBetweenModes = true;
 
-	// Set bDisplayCompetitionStatusOnLcd to false if you don't want the LCD
-	// used by the competition include file, for example, you might want
-	// to display your team name on the LCD in this function.
-	// bDisplayCompetitionStatusOnLcd = false;
-
-	// All activities that occur before the competition starts
-	// Example: clearing encoders, setting servo positions, ...
+	SensorValue(rightEnc) = 0;
+	SensorValue(leftEnc) = 0;
 }
 
 /*---------------------------------------------------------------------------*/
@@ -148,7 +143,13 @@ void redNorth()
 {
 	if (platPot == true)
 	{
-		// move back
+		while(SensorValue(rightEnc) < 1000)
+		{
+			moveForward();
+		}
+		stopDrive();
+		SensorValue(rightEnc) = 0;
+
 		// move forward
 		// roll intake in
 		// rotate left 30 - 45 degrees
