@@ -752,11 +752,11 @@ task usercontrol()
 
 		if (vexRT(Btn8U) == 1  && SensorValue(adjusterPot) < 250)
 		{
-			motor[adjuster] = 60;
+			motor[adjuster] = 55;
 		}
 		else if (vexRT(Btn8D) == 1)
 		{
-			motor[adjuster] = -60;
+			motor[adjuster] = -55;
 		}
 		else
 		{
