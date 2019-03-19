@@ -207,20 +207,6 @@ void redNorth()
 		stopDrive();
 		SensorValue(rightEnc) = 0;
 
-		while(SensorValue(rightEnc) < 600)
-		{
-			rotateLeft();
-		}
-		stopDrive();
-		SensorValue(rightEnc) = 0;
-
-		while(SensorValue(rightEnc) < 500)
-		{
-			moveForward();
-		}
-		stopDrive();
-		SensorValue(rightEnc) = 0;
-
 		while(SensorValue(rightEnc) > -1000)
 		{
 			moveBack();
@@ -235,15 +221,37 @@ void redNorth()
 		stopDrive();
 		SensorValue(rightEnc) = 0;
 
-		while(SensorValue(rightEnc) < 1000)
+		//scraper down
+
+		while(SensorValue(rightEnc) > -100)
 		{
-			moveForward();
+			moveBack();
 		}
 		stopDrive();
 		SensorValue(rightEnc) = 0;
 
-		// scraper down
+		intakeIn();
+		wait1Msec(1000);
 
+		while(SensorValue(rightEnc) < 3000)
+		{
+			moveForward();
+			intakeIn();
+		}
+		stopAllMotors();
+		SensorValue(rightEnc) = 0;
+
+		while(SensorValue(rightEnc) < 500)
+		{
+			rotateRight();
+		}
+		stopDrive();
+		SensorValue(rightEnc) = 0;
+
+		shoot();
+
+
+		/***** RECODE ******/
 		while(SensorValue(rightEnc) > -200)
 		{
 			moveBack();
@@ -338,6 +346,7 @@ void redNorth()
 		}
 		stopDrive();
 		SensorValue(rightEnc) = 0;
+
 
 		// move forward
 		// scraper down
@@ -718,7 +727,6 @@ bool brake = false;
 
 // Included files
 #include "Deadzone Drive.c";
-#include "PID Parking Brake.c";
 
 task usercontrol()
 {
@@ -752,7 +760,7 @@ task usercontrol()
 			motor[puncherLeft] = 0;
 		}
 
-		if (vexRT(Btn8U) == 1  && SensorValue(adjusterPot) < 250)
+		if (vexRT(Btn8U) == 1)
 		{
 			motor[adjuster] = 127;
 		}
