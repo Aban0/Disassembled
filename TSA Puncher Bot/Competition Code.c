@@ -177,12 +177,9 @@ void redNorth()
 		stopDrive();
 
 		shoot();
-
 		intakeIn();
 		pUp();
-		wait1Msec(1000);
 		stopAllMotors();
-
 		shoot();
 
 		// pdown // not needed?
@@ -249,7 +246,10 @@ void redNorth()
 		SensorValue(rightEnc) = 0;
 
 		shoot();
-
+		intakeIn();
+		pDown();
+		stopAllMotors();
+		shoot();
 
 		/***** RECODE ******/
 		while(SensorValue(rightEnc) > -200)
