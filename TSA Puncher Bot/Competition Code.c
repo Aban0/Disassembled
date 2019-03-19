@@ -162,7 +162,7 @@ void redNorth()
 {
 	if (platPot == true)
 	{
-		while(SensorValue(rightEnc) < 1000)
+		while(SensorValue(rightEnc) < 1500)
 		{
 			moveForward();
 			intakeIn();
@@ -170,7 +170,7 @@ void redNorth()
 		stopAllMotors();
 		SensorValue(rightEnc) = 0;
 
-		while(SensorValue(rightEnc) < 400)
+		while(SensorValue(rightEnc) < 500)
 		{
 			rotateLeft();
 		}
@@ -185,11 +185,22 @@ void redNorth()
 
 		shoot();
 
-		// pdown
+		// pdown // not needed?
 
 		SensorValue(rightEnc) = 0;
 
-		while(SensorValue(rightEnc) < 1000)
+		while(SensorValue(rightEnc) < 400)
+		{
+			motor[frontRight] = 127;
+			motor[midRight] = 127;
+			motor[backRight] = 127;
+			motor[frontLeft] = 60;
+			motor[midLeft] = 60;
+			motor[backLeft] = 60;
+		}
+		SensorValue(rightEnc) = 0;
+
+		while(SensorValue(rightEnc) < 1500)
 		{
 			moveForward();
 		}
@@ -752,11 +763,11 @@ task usercontrol()
 
 		if (vexRT(Btn8U) == 1  && SensorValue(adjusterPot) < 250)
 		{
-			motor[adjuster] = 55;
+			motor[adjuster] = 127;
 		}
 		else if (vexRT(Btn8D) == 1)
 		{
-			motor[adjuster] = -55;
+			motor[adjuster] = -127;
 		}
 		else
 		{
