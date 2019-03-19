@@ -332,7 +332,13 @@ void redNorth()
 		stopDrive();
 		SensorValue(rightEnc) = 0;
 
-		// move back
+		while(SensorValue(rightEnc) > -1000)
+		{
+			moveBack();
+		}
+		stopDrive();
+		SensorValue(rightEnc) = 0;
+
 		// move forward
 		// scraper down
 		// move back
@@ -674,7 +680,7 @@ void failSafe()
 task autonomous()
 {
 	// Choose Auton
-	if (autonPot == true)
+	if (autonPot == false)
 	{
 		blueNorth();
 	}
@@ -682,7 +688,7 @@ task autonomous()
 	{
 		blueSouth();
 	}
-	else if (false)
+	else if (true)
 	{
 		redNorth();
 	}
@@ -716,26 +722,11 @@ bool brake = false;
 
 task usercontrol()
 {
-	datalogDataGroupStart();
-	datalogAddValue( 0, motor[midRight]);
-	datalogAddValue( 1, motor[midLeft]);
-	datalogAddValue( 2, SensorValue[adjusterPot]);
-	datalogAddValue( 3, motor[adjuster]);
-	datalogDataGroupEnd();
-
 	while (true)
 	{
 		// Starts tasks from Deadzone Drive.c
 		startTask (rightDrive);
 		startTask (leftDrive);
-
-		if (vexRT(Btn7D) == 1)
-		{
-			setpoint = SensorValue(rightEnc); // Sets current location as the target for PID
-			startTask (pBrake);
-			brake = !brake; // Toggles brake on
-			wait1Msec(10); // Waits 10 miliseconds to prevent the toggle from switching off again before the button is released
-		}
 
 		if (vexRT(Btn5U) == 1)
 		{
