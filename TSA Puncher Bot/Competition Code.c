@@ -28,6 +28,10 @@
 
 //Main competition background code...do not modify!
 #include "Vex_Competition_Includes.c"
+
+// Global Variables
+int reqDistance;
+
 #include "Auton PID.c"
 
 /*---------------------------------------------------------------------------*/
@@ -49,7 +53,6 @@ void pre_auton()
 
 	SensorValue(rightEnc) = 0;
 	SensorValue(leftEnc) = 0;
-	startTask(pid);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -62,14 +65,49 @@ void pre_auton()
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
 
+void intakeIn()
+{
+	motor[intake] = 127;
+}
+
+void intakeOut()
+{
+	motor[intake] = -127;
+}
+
+void stopDrive()
+{
+	motor[frontRight] = 0;
+	motor[midRight] = 0;
+	motor[backRight] = 0;
+	motor[frontLeft] = 0;
+	motor[midLeft] = 0;
+	motor[backLeft] = 0;
+}
+
+void stopAllMotors()
+{
+	motor[frontRight] = 0;
+	motor[midRight] = 0;
+	motor[backRight] = 0;
+	motor[frontLeft] = 0;
+	motor[midLeft] = 0;
+	motor[backLeft] = 0;
+	motor[intake] = 0;
+	motor[lift] = 0;
+	motor[adjuster] = 0;
+	motor[puncher] = 0;
+}
+
 // Auton Functions
 void redNorth()
 {
 	if (platPot == true)
 	{
+		moveStraight(37);
+		intakeIn();
+		wait1Msec(1000);
 
-
-		// move forward 10 inches
 
 		while(SensorValue(rightEnc) < 500)
 		{
