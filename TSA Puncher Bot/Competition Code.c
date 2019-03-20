@@ -28,10 +28,6 @@
 
 //Main competition background code...do not modify!
 #include "Vex_Competition_Includes.c"
-
-// Global Variables
-int reqDistance;
-
 #include "Auton PID.c"
 
 /*---------------------------------------------------------------------------*/
@@ -106,16 +102,6 @@ void liftDown()
 	motor[lift] = -127;
 }
 
-void stopDrive()
-{
-	motor[frontRight] = 0;
-	motor[midRight] = 0;
-	motor[backRight] = 0;
-	motor[frontLeft] = 0;
-	motor[midLeft] = 0;
-	motor[backLeft] = 0;
-}
-
 void stopAll()
 {
 	motor[intake] = 0;
@@ -125,6 +111,10 @@ void stopAll()
 }
 
 // Auton Functions
+
+/***************************/
+/*********RED NORTH*********/
+/***************************/
 void redNorth()
 {
 	if (platPot == true)
@@ -134,10 +124,8 @@ void redNorth()
 		intakeIn();
 		wait1Msec(1000);
 
-		// Aim at middle flags
-		moveTurn(-360);
-
 		// Shoot both middle flags
+		moveTurn(-360);
 		shoot();
 		intakeIn();
 		wait1Msec(500);
@@ -187,440 +175,387 @@ void redNorth()
 		moveStraight(-72);
 		moveTurn(360);
 		moveStraight(36);
-
-		/*
-		while(SensorValue(rightEnc) > -200)
-		{
-			moveBack();
-			intakeIn();
-		}
-		stopAllMotors();
-		SensorValue(rightEnc) = 0;
-
-		// scraper up
-
-		while(SensorValue(rightEnc) > -1000)
-		{
-			rotateRight();
-		}
-		stopDrive();
-		SensorValue(rightEnc) = 0;
-
-		shoot();
-		pDown();
-		wait1Msec(500);
-
-		while(SensorValue(rightEnc) < 1000)
-		{
-			rotateLeft();
-			intakeIn();
-		}
-		stopAllMotors();
-		SensorValue(rightEnc) = 0;
-
-		while(SensorValue(rightEnc) < 3000)
-		{
-			moveForward();
-			intakeOut();
-		}
-		stopAllMotors();
-		SensorValue(rightEnc) = 0;
-
-		intakeIn();
-
-		while(SensorValue(rightEnc) > -100)
-		{
-			moveBack();
-		}
-		stopDrive();
-		SensorValue(rightEnc) = 0;
-
-		while(SensorValue(rightEnc) > -500)
-		{
-			rotateRight();
-		}
-		stopDrive();
-		SensorValue(rightEnc) = 0;
-
-		shoot();
-
-		while(SensorValue(rightEnc) < 1000)
-		{
-			moveForward();
-		}
-		stopAllMotors();
-		SensorValue(rightEnc) = 0;
-
-		while(SensorValue(rightEnc) > -1000)
-		{
-			moveBack();
-		}
-		stopDrive();
-		SensorValue(rightEnc) = 0;
-
-		shoot();
-		pUp();
-		wait1Msec(500);
-
-		// Park on platform and shoot middle top flag
-		while(SensorValue(rightEnc) > -2000)
-		{
-			moveBack();
-		}
-		stopDrive();
-		SensorValue(rightEnc) = 0;
-
-		while(SensorValue(rightEnc) > -500)
-		{
-			rotateRight();
-		}
-		stopDrive();
-		SensorValue(rightEnc) = 0;
-
-		while(SensorValue(rightEnc) > -1000)
-		{
-			moveBack();
-		}
-		stopDrive();
-		SensorValue(rightEnc) = 0; */
-
-
-		// move forward
-		// scraper down
-		// move back
-		// intake in
-		// scraper up
-		// rotate right 15-25 degrees
-		// move forward
-		// rotate left
-		// pup
-		// shoot
 	}
 	else
 	{
-		// move back
-		// move forward
-		// roll intake in
-		// rotate left 30 - 45 degrees
-		// shoot
-		// roll intake in
-		// pup
-		// shoot
-		// pdown
-		// move forward
-		// rotate left
-		// move forward
-		// move back
-		// rotate left
-		// move forward
-		// scraper down
-		// move forward
-		// intake out
-		// scraper up
-		// intake in
-		// move forward
-		// move back
-		// rotate right
-		// shoot
-		// intake in
-		// pup
-		// shoot
-		// pdown
-		// move forward
+		// Intake from under first cap
+		moveStraight(37);
+		intakeIn();
+		wait1Msec(1000);
 
-		// Get in a good position for driver and try shooting middle flags
-		// intake in
-		// move back
-		// rotate right 30 - 45 degrees
-		// shoot
-		// intake in
-		// pup
-		// shoot
-		// intake in
+		// Shoot both middle flags
+		moveTurn(-360);
+		shoot();
+		intakeIn();
+		wait1Msec(500);
+		stopAll();
+		pUp();
+		shoot();
+
+		// Hit middle bottom flag the back up and aim for cap
+		moveStraight(50);
+		moveStraight(-27);
+		moveTurn(-360);
+
+		// Pull balls off of cap and intake them
+		moveStraight(11);
+		liftDown();
+		wait1Msec(2000);
+		stopAll();
+		moveStraight(-6);
+		intakeIn();
+		wait1Msec(1000);
+
+		// Flip cap and intake ball back in
+		intakeOut();
+		moveStraight(41);
+		stopAll();
+		intakeIn();
+		wait1Msec(1000);
+		stopAll();
+		liftUp();
+		wait1Msec(2000);
+		stopAll();
+
+		// Shoot red side flags
+		moveTurn(360);
+		shoot();
+		intakeIn();
+		wait1Msec(500);
+		pDown();
+		shoot();
+
+		// Hit bottom flag while intaking
+		intakeIn();
+		moveStraight(50);
+		stopAll();
 	}
 }
 
+/***************************/
+/*********RED SOUTH*********/
+/***************************/
 void redSouth()
 {
 	if (platPot == false)
 	{
-		// move forward
-		// intake in
-		// rotate left 45 degrees
-		// shoot
-		// intake in
-		// pup
-		// shoot
-		// pdown
-		// rotate right 45 degrees
-		// move back
-		// rotate right
-		// move forward
-		// rotate left
-		// move forward
-		// scraper down
-		// move back
-		// intake in
-		// scraper up
-		// rotate left ~50 degrees
-		// shoot
-		// intake in
-		// pup
-		// shoot
-		// rotate right ~50 degrees
-		// move forward
-		// intake out
-		// move back
-		// rotate left
-		// move forward
-		// scraper down
-		// move back
-		// intake in
-		// scraper up
-		// rotate left 45 degrees
-		// shoot
-		// pdown
+		// Intake ball from under first cap
+		moveStraight(30);
+		intakeIn();
+		wait1Msec(1000);
+		stopAll();
+		moveStraight(3);
 
-		// Park on platform
-		// move back
-		// rotate right 45 degrees
-		// move back
-		// move forward
+		// Shoot at far post then at middle post
+		moveTurn(-180);
+		shoot();
+		intakeIn();
+		moveTurn(-180);
+		stopAll();
+		shoot();
+
+		// Back into wall to straighten out
+		moveTurn(360);
+		moveStraight(-24);
+		moveTurn(-360);
+		moveStraight(-28);
+
+		// Pull balls off of blue cap and intake
+		moveStraight(2);
+		moveTurn(360);
+		moveStraight(13);
+		liftDown();
+		wait1Msec(2000);
+		moveStraight(-4);
+		intakeIn();
+		wait1Msec(2000);
+		stopAll();
+
+		// Flip cap
+		liftUp();
+		moveStraight(-3);
+		stopAll();
+		liftDown();
+		wait1Msec(1000);
+		moveStraight(7);
+		liftUp();
+		wait1Msec(2000);
+		stopAll();
+
+		// Park
+		moveStraight(-2);
+		moveTurn(-360);
+		moveStraight(-4);
+		moveStraight(36);
 	}
 	else
 	{
-		// move forward
-		// intake in
-		// rotate left 45 degrees
-		// shoot
-		// intake in
-		// pup
-		// shoot
-		// pdown
-		// rotate right 45 degrees
-		// move back
-		// rotate right
-		// move forward
-		// rotate left
-		// move forward
-		// scraper down
-		// move back
-		// intake in
-		// scraper up
-		// rotate left ~50 degrees
-		// shoot
-		// intake in
-		// pup
-		// shoot
-		// rotate right ~50 degrees
-		// move forward
-		// intake out
-		// move back
-		// rotate left
-		// move forward
-		// scraper down
-		// move back
-		// intake in
-		// scraper up
-		// rotate left 45 degrees
-		// shoot
-		// pdown
+		// Intake ball from under first cap
+		moveStraight(30);
+		intakeIn();
+		wait1Msec(1000);
+		stopAll();
+		moveStraight(3);
 
-		// Get in a good position for driver
-		// move back
-		// rotate right ~135 degrees
+		// Shoot at far post then at middle post
+		moveTurn(-180);
+		shoot();
+		intakeIn();
+		moveTurn(-180);
+		stopAll();
+		shoot();
+
+		// Back into wall to straighten out
+		moveTurn(360);
+		moveStraight(-24);
+		moveTurn(-360);
+		moveStraight(-28);
+
+		// Pull balls off of blue cap and intake
+		moveStraight(2);
+		moveTurn(360);
+		moveStraight(13);
+		liftDown();
+		wait1Msec(2000);
+		moveStraight(-4);
+		intakeIn();
+		wait1Msec(2000);
+		stopAll();
+
+		// Flip cap
+		liftUp();
+		moveStraight(-3);
+		stopAll();
+		liftDown();
+		wait1Msec(1000);
+		moveStraight(7);
+		liftUp();
+		wait1Msec(2000);
+		stopAll();
 	}
 }
 
+/****************************/
+/*********BLUE NORTH*********/
+/****************************/
 void blueNorth()
 {
 	if (platPot == false)
 	{
-		// move back
-		// move forward
-		// roll intake in
-		// rotate right 30 - 45 degrees
-		// shoot
-		// roll intake in
-		// pup
-		// shoot
-		// pdown
-		// move forward
-		// rotate right
-		// move forward
-		// move back
-		// rotate right
-		// move forward
-		// scraper down
-		// move forward
-		// intake out
-		// scraper up
-		// intake in
-		// move forward
-		// move back
-		// rotate left
-		// shoot
-		// roll intake in
-		// pup
-		// shoot
-		// pdown
-		// move forward
+		// Intake from under first cap
+		moveStraight(37);
+		intakeIn();
+		wait1Msec(1000);
 
-		// Park on platform and shoot middle top flag
-		// move back
-		// rotate left
-		// move back
-		// move forward
-		// scraper down
-		// move back
-		// intake in
-		// scraper up
-		// rotate left 15-25 degrees
-		// move forward
-		// rotate right
-		// pup
-		// shoot
+		// Shoot both middle flags
+		moveTurn(360);
+		shoot();
+		intakeIn();
+		wait1Msec(500);
+		stopAll();
+		pUp();
+		shoot();
+
+		// Hit middle bottom flag the back up and aim for cap
+		moveStraight(50);
+		moveStraight(-27);
+		moveTurn(360);
+
+		// Pull balls off of cap and intake them
+		moveStraight(11);
+		liftDown();
+		wait1Msec(2000);
+		stopAll();
+		moveStraight(-6);
+		intakeIn();
+		wait1Msec(1000);
+
+		// Flip cap and intake ball back in
+		intakeOut();
+		moveStraight(41);
+		stopAll();
+		intakeIn();
+		wait1Msec(1000);
+		stopAll();
+		liftUp();
+		wait1Msec(2000);
+		stopAll();
+
+		// Shoot blue side flags
+		moveTurn(-360);
+		shoot();
+		intakeIn();
+		wait1Msec(500);
+		pDown();
+		shoot();
+
+		// Hit bottom flag while intaking
+		intakeIn();
+		moveStraight(50);
+		stopAll();
+
+		// Park on platform
+		moveStraight(-72);
+		moveTurn(-360);
+		moveStraight(36);
 	}
 	else
 	{
-		// move back
-		// move forward
-		// roll intake in
-		// rotate right 30 - 45 degrees
-		// shoot
-		// roll intake in
-		// pup
-		// shoot
-		// pdown
-		// move forward
-		// rotate right
-		// move forward
-		// move back
-		// rotate right
-		// move forward
-		// scraper down
-		// move forward
-		// intake out
-		// scraper up
-		// intake in
-		// move forward
-		// move back
-		// rotate left
-		// shoot
-		// roll intake in
-		// pup
-		// shoot
-		// pdown
-		// move forward
+		// Intake from under first cap
+		moveStraight(37);
+		intakeIn();
+		wait1Msec(1000);
 
-		// Get in a good position for driver and  try shooting middle flags
-		// intake in
-		// move back
-		// rotate left 30 - 45 degrees
-		// shoot
-		// intake in
-		// pup
-		// shoot
-		// intake in
+		// Shoot both middle flags
+		moveTurn(360);
+		shoot();
+		intakeIn();
+		wait1Msec(500);
+		stopAll();
+		pUp();
+		shoot();
+
+		// Hit middle bottom flag the back up and aim for cap
+		moveStraight(50);
+		moveStraight(-27);
+		moveTurn(360);
+
+		// Pull balls off of cap and intake them
+		moveStraight(11);
+		liftDown();
+		wait1Msec(2000);
+		stopAll();
+		moveStraight(-6);
+		intakeIn();
+		wait1Msec(1000);
+
+		// Flip cap and intake ball back in
+		intakeOut();
+		moveStraight(41);
+		stopAll();
+		intakeIn();
+		wait1Msec(1000);
+		stopAll();
+		liftUp();
+		wait1Msec(2000);
+		stopAll();
+
+		// Shoot blue side flags
+		moveTurn(-360);
+		shoot();
+		intakeIn();
+		wait1Msec(500);
+		pDown();
+		shoot();
+
+		// Hit bottom flag while intaking
+		intakeIn();
+		moveStraight(50);
+		stopAll();
 	}
 }
 
+/****************************/
+/*********BLUE SOUTH*********/
+/****************************/
 void blueSouth()
 {
 	if (platPot == false)
 	{
-		// move forward
-		// intake in
-		// rotate right 45 degrees
-		// shoot
-		// intake in
-		// pup
-		// shoot
-		// pdown
-		// rotate left 45 degrees
-		// move back
-		// rotate left
-		// move forward
-		// rotate right
-		// move forward
-		// scraper down
-		// move back
-		// intake in
-		// scraper up
-		// rotate right ~50 degrees
-		// shoot
-		// intake in
-		// pup
-		// shoot
-		// rotate left ~50 degrees
-		// move forward
-		// intake out
-		// move back
-		// rotate right
-		// move forward
-		// scraper down
-		// move back
-		// intake in
-		// scraper up
-		// rotate right 45 degrees
-		// shoot
-		// pdown
+		// Intake ball from under first cap
+		moveStraight(30);
+		intakeIn();
+		wait1Msec(1000);
+		stopAll();
+		moveStraight(3);
 
-		// Park on platform
-		// move back
-		// rotate left 45 degrees
-		// move back
-		// move forward
+		// Shoot at far post then at middle post
+		moveTurn(180);
+		shoot();
+		intakeIn();
+		moveTurn(180);
+		stopAll();
+		shoot();
+
+		// Back into wall to straighten out
+		moveTurn(-360);
+		moveStraight(-24);
+		moveTurn(360);
+		moveStraight(-28);
+
+		// Pull balls off of blue cap and intake
+		moveStraight(2);
+		moveTurn(-360);
+		moveStraight(13);
+		liftDown();
+		wait1Msec(2000);
+		moveStraight(-4);
+		intakeIn();
+		wait1Msec(2000);
+		stopAll();
+
+		// Flip cap
+		liftUp();
+		moveStraight(-3);
+		stopAll();
+		liftDown();
+		wait1Msec(1000);
+		moveStraight(7);
+		liftUp();
+		wait1Msec(2000);
+		stopAll();
+
+		// Park
+		moveStraight(-2);
+		moveTurn(360);
+		moveStraight(-4);
+		moveStraight(36);
 	}
 	else
 	{
-		// move forward
-		// intake in
-		// rotate right 45 degrees
-		// shoot
-		// intake in
-		// pup
-		// shoot
-		// pdown
-		// rotate left 45 degrees
-		// move back
-		// rotate left
-		// move forward
-		// rotate right
-		// move forward
-		// scraper down
-		// move back
-		// intake in
-		// scraper up
-		// rotate right ~50 degrees
-		// shoot
-		// intake in
-		// pup
-		// shoot
-		// rotate left ~50 degrees
-		// move forward
-		// intake out
-		// move back
-		// rotate right
-		// move forward
-		// scraper down
-		// move back
-		// intake in
-		// scraper up
-		// rotate right 45 degrees
-		// shoot
-		// pdown
+		// Intake ball from under first cap
+		moveStraight(30);
+		intakeIn();
+		wait1Msec(1000);
+		stopAll();
+		moveStraight(3);
 
-		// Get in a good position for driver
-		// move back
-		// rotate left ~135 degrees
+		// Shoot at far post then at middle post
+		moveTurn(180);
+		shoot();
+		intakeIn();
+		moveTurn(180);
+		stopAll();
+		shoot();
+
+		// Back into wall to straighten out
+		moveTurn(-360);
+		moveStraight(-24);
+		moveTurn(360);
+		moveStraight(-28);
+
+		// Pull balls off of blue cap and intake
+		moveStraight(2);
+		moveTurn(-360);
+		moveStraight(13);
+		liftDown();
+		wait1Msec(2000);
+		moveStraight(-4);
+		intakeIn();
+		wait1Msec(2000);
+		stopAll();
+
+		// Flip cap
+		liftUp();
+		moveStraight(-3);
+		stopAll();
+		liftDown();
+		wait1Msec(1000);
+		moveStraight(7);
+		liftUp();
+		wait1Msec(2000);
+		stopAll();
 	}
-}
-
-// Just in case no auton is selected
-void failSafe()
-{
-	// Keep this function blank
 }
 
 task autonomous()
@@ -641,10 +576,6 @@ task autonomous()
 	else if (false)
 	{
 		redSouth();
-	}
-	else
-	{
-		failSafe();
 	}
 }
 
