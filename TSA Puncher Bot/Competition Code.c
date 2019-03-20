@@ -82,6 +82,30 @@ void shoot()
 	motor[puncher] = 0;
 }
 
+void pUp()
+{
+	motor[adjuster] = 127;
+	wait1Msec(500);
+	motor[adjuster] = 0;
+}
+
+void pDown()
+{
+	motor[adjuster] = -127;
+	wait1Msec(500);
+	motor[adjuster] = 0;
+}
+
+void liftUp()
+{
+	motor[lift] = 127;
+}
+
+void liftDown()
+{
+	motor[lift] = -127;
+}
+
 void stopDrive()
 {
 	motor[frontRight] = 0;
@@ -105,78 +129,66 @@ void redNorth()
 {
 	if (platPot == true)
 	{
+		// Intake from under first cap
 		moveStraight(37);
 		intakeIn();
 		wait1Msec(1000);
 
+		// Aim at middle flags
 		moveTurn(-360);
 
+		// Shoot both middle flags
 		shoot();
 		intakeIn();
 		wait1Msec(500);
-
-		/*
-		intakeIn();
+		stopAll();
 		pUp();
-		stopAllMotors();
 		shoot();
 
-		while(SensorValue(rightEnc) < 1500)
-		{
-			moveForward(); // 50 inches
-		}
-		stopDrive();
-		SensorValue(rightEnc) = 0;
+		// Hit middle bottom flag the back up and aim for cap
+		moveStraight(50);
+		moveStraight(-27);
+		moveTurn(-360);
 
-		while(SensorValue(rightEnc) > -1000)
-		{
-			moveBack(); // 27 inches
-		}
-		stopDrive();
-		SensorValue(rightEnc) = 0;
-
-		while(SensorValue(rightEnc) < 500)
-		{
-			rotateLeft(); // 90 degrees
-		}
-		stopDrive();
-		SensorValue(rightEnc) = 0;
-
-		// move forward 11 inches
-
-		//scraper down
-
-		while(SensorValue(rightEnc) > -100)
-		{
-			moveBack(); // 6 inches
-		}
-		stopDrive();
-		SensorValue(rightEnc) = 0;
-
+		// Pull balls off of cap and intake them
+		moveStraight(11);
+		liftDown();
+		wait1Msec(2000);
+		stopAll();
+		moveStraight(-6);
 		intakeIn();
 		wait1Msec(1000);
 
-		while(SensorValue(rightEnc) < 3000)
-		{
-			moveForward(); // 41 inches
-			intakeIn();
-		}
-		stopAllMotors();
-		SensorValue(rightEnc) = 0;
+		// Flip cap and intake ball back in
+		intakeOut();
+		moveStraight(41);
+		stopAll();
+		intakeIn();
+		wait1Msec(1000);
+		stopAll();
+		liftUp();
+		wait1Msec(2000);
+		stopAll();
 
-		while(SensorValue(rightEnc) < 500)
-		{
-			rotateRight(); // 90 degrees
-		}
-		stopDrive();
-		SensorValue(rightEnc) = 0;
-
+		// Shoot red side flags
+		moveTurn(360);
 		shoot();
 		intakeIn();
+		wait1Msec(500);
 		pDown();
-		stopAllMotors();
 		shoot();
 
+		// Hit bottom flag while intaking
+		intakeIn();
+		moveStraight(50);
+		stopAll();
+
+		// Park on platform
+		moveStraight(-72);
+		moveTurn(360);
+		moveStraight(36);
+
+		/*
 		while(SensorValue(rightEnc) > -200)
 		{
 			moveBack();
