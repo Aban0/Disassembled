@@ -75,6 +75,13 @@ void intakeOut()
 	motor[intake] = -127;
 }
 
+void shoot()
+{
+	motor[puncher] = 127;
+	wait1Msec(1000);
+	motor[puncher] = 0;
+}
+
 void stopDrive()
 {
 	motor[frontRight] = 0;
@@ -85,14 +92,8 @@ void stopDrive()
 	motor[backLeft] = 0;
 }
 
-void stopAllMotors()
+void stopAll()
 {
-	motor[frontRight] = 0;
-	motor[midRight] = 0;
-	motor[backRight] = 0;
-	motor[frontLeft] = 0;
-	motor[midLeft] = 0;
-	motor[backLeft] = 0;
 	motor[intake] = 0;
 	motor[lift] = 0;
 	motor[adjuster] = 0;
@@ -108,14 +109,13 @@ void redNorth()
 		intakeIn();
 		wait1Msec(1000);
 
-
-		while(SensorValue(rightEnc) < 500)
-		{
-			rotateLeft(); // 90 degrees
-		}
-		stopDrive();
+		moveTurn(-360);
 
 		shoot();
+		intakeIn();
+		wait1Msec(500);
+
+		/*
 		intakeIn();
 		pUp();
 		stopAllMotors();
@@ -177,7 +177,6 @@ void redNorth()
 		stopAllMotors();
 		shoot();
 
-		/***** RECODE ******/
 		while(SensorValue(rightEnc) > -200)
 		{
 			moveBack();
@@ -271,7 +270,7 @@ void redNorth()
 			moveBack();
 		}
 		stopDrive();
-		SensorValue(rightEnc) = 0;
+		SensorValue(rightEnc) = 0; */
 
 
 		// move forward

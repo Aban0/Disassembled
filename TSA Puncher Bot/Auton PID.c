@@ -135,10 +135,10 @@ void moveTurn(int reqDistance)
 		// Add pid to motor value
 		motor[frontLeft]   = pidResult;
 		motor[midLeft]     = pidResult;
-		motor[backLeft]    = pidResult*leftTurn;
+		motor[backLeft]    = pidResult;
 		motor[frontRight]  = pidResult;
 		motor[midRight]    = pidResult;
-		motor[backRight]   = pidResult*rightTurn;
+		motor[backRight]   = pidResult;
 
 		// There is a bug in RobotC where if you print too fast,
 		//   you might get weird characters at random
