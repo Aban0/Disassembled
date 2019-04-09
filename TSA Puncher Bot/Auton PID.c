@@ -81,9 +81,9 @@ void moveStraight(int reqDistance)
 		float pidResult = PIDCompute(&pid1, targetDistance - currentDistance);
 
 		// Add pid to motor value
-		motor[frontLeft]   = pidResult;
-		motor[midLeft]     = pidResult;
-		motor[backLeft]    = pidResult;
+		motor[frontLeft]   = -pidResult;
+		motor[midLeft]     = -pidResult;
+		motor[backLeft]    = -pidResult;
 		motor[frontRight]  = pidResult;
 		motor[midRight]    = pidResult;
 		motor[backRight]   = pidResult;
@@ -133,9 +133,9 @@ void moveTurn(int reqDistance)
 		float pidResult = PIDCompute(&pid1, reqDistance - currentDistance);
 
 		// Add pid to motor value
-		motor[frontLeft]   = pidResult;
-		motor[midLeft]     = pidResult;
-		motor[backLeft]    = pidResult;
+		motor[frontLeft]   = -pidResult;
+		motor[midLeft]     = -pidResult;
+		motor[backLeft]    = -pidResult;
 		motor[frontRight]  = pidResult;
 		motor[midRight]    = pidResult;
 		motor[backRight]   = pidResult;

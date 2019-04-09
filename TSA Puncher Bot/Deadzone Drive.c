@@ -22,9 +22,9 @@ task leftDrive()
 	// Drive controls with deadzone for the left drive/joystick
 	if (abs(vexRT[Ch3]) > 15)
 	{
-		motor[frontLeft] = vexRT[Ch3];
-		motor[midLeft] = vexRT[Ch3];
-		motor[backLeft] = vexRT[Ch3];
+		motor[frontLeft] = -vexRT[Ch3];
+		motor[midLeft] = -vexRT[Ch3];
+		motor[backLeft] = -vexRT[Ch3];
 	}
 	else
 	{
