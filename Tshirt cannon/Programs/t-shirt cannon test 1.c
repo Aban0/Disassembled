@@ -11,8 +11,8 @@ task main()
 		{
 			motor[leftDrive] = vexRT[Ch3];
 			motor[leftDrive2] = vexRT[Ch3];
-			motor[rightDrive] = vexRT[Ch2]; // There is a right drive motor that has a bad PWM cable connected to it, the connection
-			motor[rightDrive2] = vexRT[Ch2]; // is bad in the middle where its soldered/heatshrinked together.
+			motor[rightDrive] = vexRT[Ch2];
+			motor[rightDrive2] = vexRT[Ch2];
 
 			if (vexRT[Btn6U] == 1)
 			{
